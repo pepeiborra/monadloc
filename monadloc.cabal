@@ -1,0 +1,30 @@
+name: monadloc
+version: 0.1
+Cabal-Version:  >= 1.2.3
+build-type: Simple
+license: PublicDomain
+author: Pepe Iborra
+maintainer: pepeiborra@gmail.com
+homepage: http://github.com/pepeiborra/monadloc
+description: A class for monads which can keep a stack trace
+synopsis: A class for monads which can keep a stack trace
+category: Control, Monads
+stability: experimental
+
+Flag transformers
+   default: False
+
+
+Library
+  buildable: True
+  build-depends: base, pretty, template-haskell
+
+  if flag(transformers)
+     build-depends: transformers
+     cpp-options: -DTRANSFORMERS
+  else
+     build-depends: mtl
+
+  extensions:  FlexibleInstances
+  exposed-modules:
+     Control.Monad.Loc
