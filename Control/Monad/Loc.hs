@@ -58,8 +58,9 @@ withLocTH = do
   loc <- qLocation
   let loc_msg = showLoc loc
   [| withLoc loc_msg |]
- where
-   showLoc Loc{loc_module=mod, loc_filename=filename, loc_start=start} = render $
+
+showLoc :: Loc -> String
+showLoc Loc{loc_module=mod, loc_filename=filename, loc_start=start} = render $
                      {- text package <> char '.' <> -}
                      text mod <> parens (text filename) <> colon <+> text (show start)
 
