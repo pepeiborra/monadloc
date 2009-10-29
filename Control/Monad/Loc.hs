@@ -33,9 +33,7 @@ class Monad m => MonadLoc m where
   --
   --   By default 'withLoc' is defined as the identity on its second argument
   withLoc :: String -> m a -> m a
-  getLoc :: m [String]
-
--- instance MonadLoc a where withLoc _ = id
+  getLocTrace :: m [String]
 
 
 {-| Given a list of source locations and a Showable error, @showFailWithStackTrace@ produces output of the form
