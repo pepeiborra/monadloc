@@ -29,23 +29,23 @@ import Control.Monad.RWS
 -- | Generating stack traces for failures
 class Monad m => MonadLoc m where
   -- | 'withLoc' records the given source location in the failure trace
-  --   if the underlying monad supports recording stack traces
+  --   if the underlying monad supports recording location traces
   --
-  --   By default 'withLoc' is defined as the identity on its second argument
   withLoc :: String -> m a -> m a
   getLocTrace :: m [String]
 
 
-{-| Given a list of source locations and a Showable error, @showFailWithStackTrace@ produces output of the form
+{-| Given a stack of source locations and a Showable x, @showFailWithLocTrace@ produces output of the form
 
->       <exception details>
+>       <show x>
 >        in <module a>(<file a.hs>): (12,6)
 >           <module b>(<file b.hs>): (11,7)
 >           ...
 
 -}
-showFailWithStackTrace :: Show e => [String] -> e -> String
-showFailWithStackTrace trace e = render$
+showWithLocTrace :: Show e => [String] -> e -> String
+showWithLocTrace [] e = show e
+showWithLocTrace trace e = render$
              text (show e) $$
              text " in" <+> (vcat (map text $ reverse trace))
 
