@@ -70,24 +70,24 @@ withLocTH = do
 
 instance (Error e, MonadLoc m) => MonadLoc (ErrorT e m) where
   withLoc l (ErrorT m) = ErrorT (withLoc l m)
-  getLoc  = lift getLoc
+  getLocTrace  = lift getLocTrace
 
 instance MonadLoc m => MonadLoc (ListT m) where
   withLoc l (ListT m) = ListT (withLoc l m)
-  getLoc  = lift getLoc
+  getLocTrace  = lift getLocTrace
 
 instance MonadLoc m => MonadLoc (ReaderT r m) where
   withLoc l (ReaderT m) = ReaderT $ \env -> (withLoc l (m env))
-  getLoc  = lift getLoc
+  getLocTrace  = lift getLocTrace
 
 instance (Monoid w, MonadLoc m) => MonadLoc (WriterT w  m) where
   withLoc l (WriterT m) = WriterT (withLoc l m)
-  getLoc  = lift getLoc
+  getLocTrace  = lift getLocTrace
 
 instance MonadLoc m => MonadLoc (StateT s m) where
   withLoc l (StateT m) = StateT $ \s -> (withLoc l (m s))
-  getLoc  = lift getLoc
+  getLocTrace  = lift getLocTrace
 
 instance (Monoid w, MonadLoc m) => MonadLoc (RWST r w s m) where
   withLoc l (RWST m) = RWST $ \env s -> (withLoc l (m env s))
-  getLoc  = lift getLoc
+  getLocTrace  = lift getLocTrace
