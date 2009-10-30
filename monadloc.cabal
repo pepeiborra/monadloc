@@ -25,6 +25,13 @@ Library
   else
      build-depends: mtl
 
+  ghc-options: -Wall
   extensions:  FlexibleInstances
   exposed-modules:
      Control.Monad.Loc
+
+Executable MonadLoc
+   buildable: True
+   build-depends: haskell-src-exts
+   main-is: MonadLoc.hs
+   ghc-options: -Wall -fno-warn-name-shadowing

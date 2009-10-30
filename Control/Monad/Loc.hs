@@ -1,4 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE OverlappingInstances, UndecidableInstances #-}
 {-# LANGUAGE CPP #-}
 {-|
  * Stack traces are only provided for explicitly annotated program points.
@@ -92,3 +93,6 @@ instance MonadLoc m => MonadLoc (StateT s m) where
 instance (Monoid w, MonadLoc m) => MonadLoc (RWST r w s m) where
   withLoc l (RWST m) = RWST $ \env s -> (withLoc l (m env s))
   getLocTrace  = lift getLocTrace
+
+
+instance Monad m => MonadLoc m where withLoc _ = id; getLocTrace = return []
