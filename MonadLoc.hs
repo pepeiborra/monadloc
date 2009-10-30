@@ -14,7 +14,7 @@ main = do
                  Nothing -> ""
                  Just (ModuleHead _ mn _ _) -> prettyPrint mn
       decls' = everywhere (mkT (annotateStatements mname)) decls
-  writeFile outp $ prettyPrint mod'
+  writeFile outp $ prettyPrintWithMode ourPrintMode mod'
 
 ourParseMode :: ParseMode
 ourParseMode = defaultParseMode { extensions =
@@ -38,6 +38,8 @@ ourParseMode = defaultParseMode { extensions =
                                         ,PostfixOperators]
                                 }
 
+ourPrintMode :: PPHsMode
+ourPrintMode = defaultMode { linePragmas = True }
 
 annotateStatements :: String -> Exp SrcSpanInfo -> Exp SrcSpanInfo
 
