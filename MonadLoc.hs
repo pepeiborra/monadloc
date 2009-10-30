@@ -27,14 +27,13 @@ ourParseMode = defaultParseMode { extensions =
                                         ,Arrows
                                         ,NamedFieldPuns
                                         ,DisambiguateRecordFields
+                                        ,RecordWildCards
                                         ,StandaloneDeriving
                                         ,GeneralizedNewtypeDeriving
                                         ,ScopedTypeVariables
                                         ,PatternSignatures
                                         ,PackageImports
-                                        ,TemplateHaskell
                                         ,QuasiQuotes
-                                        ,TransformListComp
                                         ,PostfixOperators]
                                 }
 
