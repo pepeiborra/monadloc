@@ -6,10 +6,25 @@ license: PublicDomain
 author: Pepe Iborra
 maintainer: pepeiborra@gmail.com
 homepage: http://github.com/pepeiborra/monadloc
-description: A class for monads which can keep a stack trace
 synopsis: A class for monads which can keep a stack trace
 category: Control, Monads
 stability: experimental
+description:
+  This package defines a class for monads which can keep a stack trace,
+  together with the relevant instances for mtl/transformers.
+  .
+  Additionally, a preprocessor is provided which can insert calls
+  to withLoc before every monadic statement in a module.
+  .
+  To invoke the preprocessor, add the following pragma at the top of a source file:
+  .
+  > {-# OPTIONS_GHC -F -pgmF MonadLoc #-}
+  .
+  together with an import for the @Control.Monad.Loc@ module
+  .
+  This package provides no implementation of the MonadLoc interface.
+  Currently the only package that does so is control-monad-exception,
+  but any other package can implement the interface and provide monadic call traces.
 
 Flag transformers
    default: False
