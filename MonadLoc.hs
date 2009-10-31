@@ -14,7 +14,7 @@ main = do
                  Nothing -> ""
                  Just (ModuleHead _ mn _ _) -> prettyPrint mn
       decls' = everywhere (mkT (annotateStatements mname)) decls
-  writeFile outp $ prettyPrintWithMode ourPrintMode mod'
+  writeFile outp $ prettyPrintStyleMode style{lineLength=100000} ourPrintMode mod'
 
 ourParseMode :: ParseMode
 ourParseMode = defaultParseMode { extensions =
