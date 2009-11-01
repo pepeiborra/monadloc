@@ -18,7 +18,8 @@ main = do
 
 ourParseMode :: ParseMode
 ourParseMode = defaultParseMode { extensions =
-                                        [MultiParamTypeClasses
+                                        [CPP
+                                        ,MultiParamTypeClasses
                                         ,FunctionalDependencies
                                         ,FlexibleContexts
                                         ,FlexibleInstances
