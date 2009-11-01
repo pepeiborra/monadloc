@@ -10,10 +10,11 @@ synopsis: A class for monads which can keep a stack trace
 category: Control, Monads
 stability: experimental
 description:
-  This package defines a class for monads which can keep a stack trace,
-  together with the relevant instances for mtl/transformers.
+  This package defines a class for monads which can keep a monadic call trace.
   .
-  Additionally, a preprocessor is provided which can insert calls
+  . See http://pepeiborra.posterous.com/monadic-stack-traces-that-make-a-lot-of-sense for more information.
+  .
+  A preprocessor is provided which can insert calls
   to withLoc before every monadic statement in a module.
   .
   To invoke the preprocessor, add the following pragma at the top of a source file:
@@ -23,25 +24,16 @@ description:
   together with an import for the @Control.Monad.Loc@ module
   .
   This package provides no implementation of the MonadLoc interface.
-  Currently the only package that does so is control-monad-exception,
-  but any other package can implement the interface and provide monadic call traces.
-
-Flag transformers
-   default: False
+  Currently the only package that does so is "control-monad-exception",
+  but any other package can implement it and provide monadic call traces.
 
 
 Library
   buildable: True
   build-depends: base >= 4, syb, pretty, template-haskell
 
-  if flag(transformers)
-     build-depends: transformers
-     cpp-options: -DTRANSFORMERS
-  else
-     build-depends: mtl
-
   ghc-options: -Wall
-  extensions:  FlexibleInstances
+  extensions:  FlexibleInstances, OverlappingInstances, UndecidableInstances, TemplateHaskell, PatternGuards
   exposed-modules:
      Control.Monad.Loc
 
