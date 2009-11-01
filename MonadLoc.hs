@@ -8,15 +8,36 @@ import Text.PrettyPrint
 
 main :: IO ()
 main = do
-  (fn:inp:outp:_) <- getArgs
-  Module l mhead opt imports decls <- fromParseResult <$>
-                                      parseFileWithMode ourParseMode{parseFilename = fn} inp
-  let mod'   = Module l mhead opt imports decls'
-      mname  = case mhead of
-                 Nothing -> ""
-                 Just (ModuleHead _ mn _ _) -> prettyPrint mn
-      decls' = map (annotateDecl mname) decls
-  writeFile outp $ prettyPrintStyleMode style{lineLength=100000} ourPrintMode mod'
+  args <- getArgs
+  case args of
+
+    (fn:inp:outp:_) -> do
+         Module l mhead opt imports decls
+            <- fromParseResult <$>
+               parseFileWithMode ourParseMode{parseFilename = fn} inp
+         let mod'   = Module l mhead opt imports decls'
+             mname  = case mhead of
+                        Nothing -> ""
+                        Just (ModuleHead _ mn _ _) -> prettyPrint mn
+             decls' = map (annotateDecl mname) decls
+         writeFile outp $ prettyPrintStyleMode style{lineLength=100000} ourPrintMode mod'
+--         writeFile outp $ exactPrint mod' []
+
+    [] -> do
+         contents <- getContents
+         let Module l mhead opt imports decls =
+              fromParseResult $
+              parseFileContentsWithMode ourParseMode contents
+         let mod'   = Module l mhead opt imports decls'
+             mname  = case mhead of
+                        Nothing -> ""
+                        Just (ModuleHead _ mn _ _) -> prettyPrint mn
+             decls' = map (annotateDecl mname) decls
+
+         putStrLn $ prettyPrintStyleMode style{lineLength=100000} ourPrintMode mod'
+
+    _ -> error "USAGE: MonadLoc expects the input from stdin and writes to stdout"
+
 
 ourParseMode :: ParseMode
 ourParseMode = defaultParseMode { extensions =
