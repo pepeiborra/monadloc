@@ -20,6 +20,8 @@ ourParseMode :: ParseMode
 ourParseMode = defaultParseMode { extensions =
                                         [MultiParamTypeClasses
                                         ,FunctionalDependencies
+                                        ,FlexibleContexts
+                                        ,FlexibleInstances
                                         ,ExplicitForall
                                         ,ExistentialQuantification
                                         ,PatternGuards
