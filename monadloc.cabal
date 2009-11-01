@@ -32,7 +32,7 @@ Flag transformers
 
 Library
   buildable: True
-  build-depends: base, pretty, template-haskell
+  build-depends: base >= 4, syb, pretty, template-haskell
 
   if flag(transformers)
      build-depends: transformers
