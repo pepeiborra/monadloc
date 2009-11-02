@@ -27,11 +27,17 @@ description:
   Currently the only package that does so is "control-monad-exception",
   but any other package can implement it and provide monadic call traces.
 
+Flag syb-in-base
+  default: False
 
 Library
   buildable: True
-  build-depends: base >= 4, syb, pretty, template-haskell
+  build-depends: pretty, template-haskell
 
+  if flag(syb-in-base)
+    build-depends: base >= 3 && < 4
+  else
+    build-depends: base >= 4 && < 5, syb
   ghc-options: -Wall
   extensions:  FlexibleInstances, OverlappingInstances, UndecidableInstances, TemplateHaskell, PatternGuards
   exposed-modules:
