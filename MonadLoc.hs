@@ -66,11 +66,13 @@ ourParseMode = defaultParseMode { extensions =
 ourPrintMode :: PPHsMode
 ourPrintMode = defaultMode { linePragmas = True }
 
+
 annotateDecl :: String -> Decl SrcSpanInfo -> Decl SrcSpanInfo
-annotateDecl mname e@(FunBind loc (m:_)) = everywhere (mkT (annotateStatements (Just funName) mname)) e
+annotateDecl mname e@(FunBind _ (m:_)) = everywhere (mkT (annotateStatements (Just funName) mname)) e
   where
-    funName | Match _ name _ _ _ <- m = prettyPrint name
-            | InfixMatch _ _ name _ _ _ <- m = prettyPrint name
+    funName = case m of
+              Match _ name _ _ _ -> prettyPrint name
+              InfixMatch _ _ name _ _ _ -> prettyPrint name
 
 annotateDecl mname e@(PatBind _ (PVar _ fn) _ _ _) = everywhere (mkT (annotateStatements (Just $ prettyPrint fn) mname)) e
 annotateDecl mname e = everywhere (mkT (annotateStatements Nothing mname)) e
@@ -92,7 +94,7 @@ withLocCall fun m loc = App loc (Var loc withLoc) (Lit loc srclocLit)
    withLoc   = Qual loc (ModuleName loc "Control.Monad.Loc") (Ident loc "withLoc")
    srclocLit = String loc (render locString) ""
    locStringTail = text m <> parens(text (fileName loc)) <> colon <+> parens (int (startLine loc) <> comma <+> int(startColumn loc))
-   locString
-     | Nothing  <- fun = locStringTail
-     | Just fun <- fun = text fun <> comma <+> locStringTail
+   locString = case fun of
+                 Nothing  -> locStringTail
+                 Just fun -> text fun <> comma <+> locStringTail
 
