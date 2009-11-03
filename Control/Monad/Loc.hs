@@ -12,7 +12,9 @@
  * This package installs the MonadLoc preprocessor for this purpose.
    To enable it include the following pragma at the top of your haskell source files:
 
- > {-# OPTIONS_GHC -F -pgmF MonadLoc #-}
+@
+     { -\# OPTIONS_GHC -F -pgmF MonadLoc \#- }
+@
 
  * There is also the TH macro 'withLocTH' to manually annotate program points,
    but you should always use the preprocessor if possible.
@@ -54,4 +56,3 @@ showLoc :: Loc -> String
 showLoc Loc{loc_module=mod, loc_filename=filename, loc_start=start} = render $
                      {- text package <> char '.' <> -}
                      text mod <> parens (text filename) <> colon <+> text (show start)
-
