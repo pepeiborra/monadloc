@@ -31,7 +31,6 @@ class Monad m => MonadLoc m where
   --
   withLoc :: String -> m a -> m a
 
-
 instance Monad m => MonadLoc m where withLoc _ = id;
 
 

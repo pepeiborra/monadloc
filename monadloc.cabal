@@ -25,6 +25,12 @@ description:
 Flag syb-in-base
   default: False
 
+Flag mtl
+  default: True
+
+Flag transformers
+  default: True
+
 Library
   buildable: True
   build-depends: pretty, template-haskell
@@ -33,7 +39,18 @@ Library
     build-depends: base >= 3 && < 4
   else
     build-depends: base >= 4 && < 5, syb
-  ghc-options: -Wall
+
+  if flag(mtl)
+    cpp-options: -DMTL
+    build-depends: mtl
+    exposed-modules: Control.Monad.Loc.Mtl
+
+  if flag(transformers)
+    cpp-options: -DTRANSFORMERS
+    build-depends: transformers
+    exposed-modules: Control.Monad.Loc.Transformers
+  
+  ghc-options: -Wall -fno-warn-orphans
   extensions:  FlexibleInstances, OverlappingInstances, UndecidableInstances, TemplateHaskell, PatternGuards
   exposed-modules:
      Control.Monad.Loc
