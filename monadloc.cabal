@@ -9,10 +9,6 @@ homepage: http://github.com/pepeiborra/monadloc
 synopsis: A class for monads which can keep a monadic call trace
 category: Control, Monads
 stability: experimental
-source-repository head
-  type:     git
-  location: git://github.com/pepeiborra/monadloc.git
-
 description:
   This package defines a class for monads which can keep a monadic call trace.
   .
@@ -61,6 +57,11 @@ Library
 
 Executable MonadLoc
    buildable: True
-   build-depends: haskell-src-exts
+   build-depends: haskell-src-exts >= 1.3.0
    main-is: MonadLoc.hs
    ghc-options: -Wall -fno-warn-name-shadowing
+
+
+source-repository head
+  type:     git
+  location: git://github.com/pepeiborra/monadloc.git
