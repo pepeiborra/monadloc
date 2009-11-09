@@ -1,5 +1,5 @@
 name: monadloc
-version: 0.4
+version: 0.5
 Cabal-Version:  >= 1.2.3
 build-type: Simple
 license: PublicDomain
@@ -9,6 +9,10 @@ homepage: http://github.com/pepeiborra/monadloc
 synopsis: A class for monads which can keep a monadic call trace
 category: Control, Monads
 stability: experimental
+source-repository head
+  type:     git
+  location: git://github.com/pepeiborra/monadloc.git
+
 description:
   This package defines a class for monads which can keep a monadic call trace.
   .
@@ -43,7 +47,7 @@ Library
   if flag(mtl)
     cpp-options: -DMTL
     build-depends: mtl
-    exposed-modules: Control.Monad.Loc.Mtl
+    exposed-modules: Control.Monad.Loc.MTL
 
   if flag(transformers)
     cpp-options: -DTRANSFORMERS

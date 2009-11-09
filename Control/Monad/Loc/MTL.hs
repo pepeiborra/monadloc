@@ -1,5 +1,5 @@
 {-# LANGUAGE OverlappingInstances #-}
-module Control.Monad.Loc.Mtl where
+module Control.Monad.Loc.MTL where
 
 import Control.Monad.Loc
 
