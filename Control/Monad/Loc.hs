@@ -21,8 +21,8 @@
 -}
 module Control.Monad.Loc (MonadLoc(..), withLocTH) where
 import Language.Haskell.TH.Syntax (qLocation, Loc(..), Q, Exp)
-import Text.PrettyPrint
 import Prelude hiding (mod)
+import Text.Printf
 
 -- | Generating stack traces for failures
 class Monad m => MonadLoc m where
@@ -52,6 +52,6 @@ withLocTH = do
   [| withLoc loc_msg |]
 
 showLoc :: Loc -> String
-showLoc Loc{loc_module=mod, loc_filename=filename, loc_start=start} = render $
+showLoc Loc{loc_module=mod, loc_filename=filename, loc_start=start} =
                      {- text package <> char '.' <> -}
-                     text mod <> parens (text filename) <> colon <+> text (show start)
+                     printf "%s (%s). %s" mod filename (show start)

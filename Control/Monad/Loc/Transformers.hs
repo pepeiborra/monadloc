@@ -1,4 +1,9 @@
-{-# LANGUAGE OverlappingInstances #-}
+
+{-|
+  This package contains MonadLoc instance declarations for the monad
+  transformer type constructors in the @transformers@ package.
+-}
+
 module Control.Monad.Loc.Transformers where
 
 import Control.Monad.Loc
