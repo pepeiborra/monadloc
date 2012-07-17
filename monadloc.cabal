@@ -1,5 +1,5 @@
 name: monadloc
-version: 0.6
+version: 0.7
 Cabal-Version:  >= 1.6
 build-type: Simple
 license: PublicDomain
@@ -24,6 +24,7 @@ description:
 
   /Changes/:
   .
+      * 0.7 - Extracted Template Haskell macro to separate module to allow @Control.Monad.Loc@ to be Safe.
       * 0.6 - Extracted the preprocessor to a separate package @monadloc-pp@ to minimize the set of dependencies.
 
 Library
@@ -31,9 +32,9 @@ Library
   build-depends: base >= 4 && < 5, template-haskell, transformers
   
   ghc-options: -Wall -fno-warn-orphans
-  extensions:  FlexibleInstances, OverlappingInstances, UndecidableInstances, TemplateHaskell, PatternGuards
   exposed-modules:
      Control.Monad.Loc
+     Control.Monad.Loc.TH
      Control.Monad.Loc.Transformers
 
 source-repository head
