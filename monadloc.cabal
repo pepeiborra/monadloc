@@ -8,7 +8,7 @@ maintainer: pepeiborra@gmail.com
 homepage: http://github.com/pepeiborra/monadloc
 synopsis: A class for monads which can keep a monadic call trace
 category: Control, Monads
-stability: experimental
+stability: provisional
 description:
   This package defines a class for monads which can keep a monadic call trace.
   .
@@ -24,7 +24,8 @@ description:
 
   /Changes/:
   .
-      * 0.7 - Extracted Template Haskell macro to separate module to allow @Control.Monad.Loc@ to be Safe.
+      * 0.7 - Extracted Template Haskell macro to separate module to allow @Control.Monad.Loc@ to be Safe. (thanks to Deian Stefan)
+  .
       * 0.6 - Extracted the preprocessor to a separate package @monadloc-pp@ to minimize the set of dependencies.
 
 Library
