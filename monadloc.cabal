@@ -1,5 +1,5 @@
 name: monadloc
-version: 0.7
+version: 0.7.1
 Cabal-Version:  >= 1.6
 build-type: Simple
 license: PublicDomain
@@ -12,7 +12,7 @@ stability: provisional
 description:
   This package defines a class for monads which can keep a monadic call trace.
   .
-  * See the blog post <http://pepeiborra.posterous.com/monadic-stack-traces-that-make-a-lot-of-sense> for more information.
+  * See the blog post <http://pepeiborra.wordpress.com/2009/11/01/monadic-stack-traces-that-make-a-lot-of-sense> for more information.
   .
   A preprocessor is available (see the package monadloc-pp) which inserts calls
   to "Control.Monad.Loc.withLoc" before every monadic statement in a module.
